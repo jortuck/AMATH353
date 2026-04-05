@@ -1,0 +1,5 @@
+# Ignore all files in the out directory
+/out/*
+
+# Do not ignore PDF files in the out directory
+!/out/*.pdf
