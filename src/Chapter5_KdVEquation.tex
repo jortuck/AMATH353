@@ -3,7 +3,7 @@
 \documentclass[12pt, letterpaper]{article}
 \title{Chapter 5 - The Korteweg-deVries Equation - Notes}
 \author{Jordan Tucker}
-\date{April 6, 2026}
+\date{April 8, 2026}
 % Packages
 \usepackage{amsmath}
 \usepackage{parskip}
@@ -17,6 +17,54 @@
 \begin{document}
     \maketitle
     \section{The Korteweg-deVries Equation}\label{sec:the-korteweg-devries-equation}
-    \subsection{The KdV Equation}
+    \begin{quotation}
+    In 1834, J.S. Russell observed the phenomena of a large bulge of water slowly traveling along a
+    channel of water.
+    The ability of this water wave to retain its shape for such a long period of time was quite
+    remarkable and led Russell to study this disturbance by conducting numerous detailed
+    experiments.
+    He later came to call this phenomena a Wave of Translation, highly suggestive of a traveling
+    wave.
+    Russell's work on the Wave of Translation is now considered the beginning study of what are now
+    called solitary waves or solitons.
+    \end{quotation}
 
+    \subsection{The KdV Equation}
+    The \textbf{Korteweg-deVries} (KdV) equation is a PDE used to model the height of the surface of
+    shallow water in the presence of long gravity waves.
+    In these waves, the length of the wave is large compared to the depth of the water.
+    \begin{equation}
+        U_t + (a_1 + a_2 U) U_x + a_3 U_{xxx} = 0, \quad a_2,a_3 \neq 0
+    \end{equation}
+
+    It is a third order non-linear equation.
+    Scaling $x$ and $t$, and using a substitution $u = a_1 + a_2 U$ yields the reduced, more
+    commonly used form of the KdV equation.
+    \begin{equation}
+        u_t + uu_x + u_{xxx} = 0
+    \end{equation}
+
+    \subsection{Solitary Wave Solutions}
+
+    The solutions found for KdV are called \textbf{solitons} and model the wave phenomenon observed
+    by Russel.
+    We can look at the traveling wave solution in the form of a pulse.
+    \[
+        u(x,t) = f(x-ct) \ \text{where} \ c>0 \text{and} \ f^n(z) \rightarrow 0 \ \text{as}
+        \ z \rightarrow \pm \infty
+    \]
+
+    The first step is to plug in our derivatives of $f$ into our KdV equation.
+    \[
+        -cf' + ff' + f{'''} = 0
+    \]
+
+    Then we integrate once (\textit{Hint: chain rule}).
+    \[
+        -cf + \frac{1}{2} f^2 + f{''} = a
+    \]
+
+
+    Since we know $f(z)$ and $f''(z) \rightarrow 0$ as $z \rightarrow \infty$, the value of $a$ is 0.
+    We use the trick of multiplying by $f'$ to integrate again.
 \end{document}
