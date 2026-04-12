@@ -1,0 +1,69 @@
+\documentclass[14pt, letterpaper]{extarticle}
+\title{Chapter 5 - The Korteweg-deVries Equation - Notes}
+\author{Jordan Tucker}
+\date{April 11, 2026}
+% Packages
+\usepackage{amsmath}
+\usepackage{parskip}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{hyperref} %LaTeX package to import graphics
+\graphicspath{{images/}} %configuring the graphicx package
+\DeclareMathOperator{\sech}{sech}
+% Packages
+
+% Document
+\begin{document}
+    $L_1$ and $L_2$ are both linear operators, therefore, the following is true:\
+    \begin{align*}
+        L_1(af + bg) &= aL_1(f) + bL_1(g) \\
+        L_2(af + bg) &= aL_2(f) + bL_2(g)
+    \end{align*}
+    Let $L_3 = c_1 L_1 + c_2 L_2$ so using algebra
+    \begin{align*}
+        L_3(af + bg) &= (c_1 L_1 + c_2 L_2)(af + bg) \\
+        L_3(af + bg) &= c_1 L_1(af + bg) + c_2 L_2(af + bg)\\
+        L_3(af + bg) &= c_1 (aL_1(f) + b L_1 (g)) + c_2 (aL_2(f) + b L_2 (g))\\
+        L_3(af + bg) &=  c_1 aL_1(f) + c_1 b L_1 (g) + c_2 aL_2(f) + c_2 b L_2 (g)\\
+        L_3(af + bg) &= a ( c_1 L_1(f) + c_2 L_2(f) ) + b ( c_1 L_1 (g)  + c_2 L_2 (g))\\
+        L_3(af + bg) &= a L_3(f) + b L_3(g)
+    \end{align*}
+    Thus $L_3$ is linear according to our definition of linear, and therefore
+    $c_1 L_1 + c_2 L_2$ is linear for all $c_1, c_2 \in \mathbb{R} $. \qed
+    \newpage
+
+    Let $L_1$ be a linear operator such that $L_1: f \rightarrow f$.
+    We assume $G$ to be a linear operator such that $G: f \rightarrow (L_1 f)^2$.
+
+    Let $f(x) = x$ and $g(x) = 3x$.
+    $L_1(f)=f(x)=x$ and $L_1(g)=g(x)=3x$.
+    Since we are assuming $G$ is linear, $G(af + bg) = aG(f) + bG(g)$ so:
+    \begin{align*}
+        G(ax + b3x) &= aG(x) + bG(3x)\\
+        (ax+b3x)^2 &= ax^2 + b9x^2 \\
+        a^2 x^2 + 6ab x^2 + 9b^2 x^2 &= ax^2 + b9x^2\\
+        a^2 + 6ab  + 9b^2  &= a + 9b
+    \end{align*}
+    $a^2 + 6ab  + 9b^2  = a + 9b$ is not true for all values of $a, b \in \mathbb{R}$, therefore
+    we found a counter example that shows $G: f \rightarrow (L_1 f)^2$ is not a linear operator. \qed
+
+    \newpage
+    We assume $G$ to be a linear operator such that $G: f \rightarrow (L_1 f)^2$.
+    If $G$ is linear, then $G(af) = (L_1(af))^2$.
+
+
+    \begin{align*}
+        G(af) &= (L_1(af))^2 \\
+        \text{Using the linearity of $L_1$:}\quad G(af) &= (aL_1(f))^2\\
+        G(af) &= a^2 L_1(f)^2\\
+        G(af) &= a^2 G(f)
+    \end{align*}
+    $G(af) = a^2 G(f)$ is not true for all values of $a \in \mathbb{R}$, therefore it is not linear.
+    \qed
+
+    \newpage
+    
+\end{document}
