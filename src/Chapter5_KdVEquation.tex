@@ -12,6 +12,7 @@
 \usepackage{enumitem}
 \usepackage{hyperref} %LaTeX package to import graphics
 \graphicspath{{images/}} %configuring the graphicx package
+\DeclareMathOperator{\sech}{sech}
 
 % Document
 \begin{document}
@@ -67,4 +68,87 @@
 
     Since we know $f(z)$ and $f''(z) \rightarrow 0$ as $z \rightarrow \infty$, the value of $a$ is 0.
     We use the trick of multiplying by $f'$ to integrate again.
+    \begin{align*}
+            &\text{Multiply by } f': \\
+            &-c f f' + \frac{1}{2} f^2 f' + f' f'' = 0 \\
+            &\text{Integrate}: \\
+            &-\frac{1}{2} c f^2 + \frac{1}{6} f^3 + \frac{1}{2} (f')^2 =b
+    \end{align*}
+
+    Since we know $f(z)$ and $f''(z) \rightarrow 0$ as $z \rightarrow \infty$ (form of pulse), the value of $b$ is 0.
+    We can now solve for (f')^2.
+
+    \begin{align*}
+        -\frac{1}{2} c f^2 + \frac{1}{6} f^3 + \frac{1}{2} (f')^2 &= 0 \\
+        - 3c f^2 + f^3 + 3 (f')^2 &= 0 \\
+        3 (f')^2 &= 3c f^2 - f^3 \\
+        3 (f')^2 &= (3c - f)f^2
+    \end{align*}
+
+    Now from here, we need to keep in mind that $0<f(z)<3c$ in order to have a positive RHS (because
+    we need to take a square root).
+    \begin{align*}
+        3 (f')^2 &= (3c - f)f^2\\
+        \sqrt{3 (f')^2} &= \sqrt{(3c - f)f^2}\\
+        \sqrt{3}f' &= \sqrt{(3c - f)}f\\
+        \frac{\sqrt{3}}{\sqrt{(3c - f)f}} f' &= 1
+    \end{align*}
+
+    To integrate the LHS, we can make the substitution $g^2 = 3c-f$, with $f=4c-g^2$ and $f' = -2gg'$
+    \begin{align*}
+        \frac{\sqrt{3}}{\sqrt{(3c - f)f}} f' &= 1\\
+        \frac{\sqrt{3}}{\sqrt{g^2} (3c-g^2) } (-2gg') &= 1\\
+        \frac{\sqrt{3}}{\sqrt{g^2} (3c-g^2) } (2gg') &= -1\\
+        \frac{2gg' \sqrt{3}}{\sqrt{g^2} (3c-g^2) } &= -1\\
+        \frac{2gg' \sqrt{3}}{g (3c-g^2) } &= -1\\
+        \frac{2g' \sqrt{3}}{ (3c-g^2) } &= -1\\
+        \frac{2 \sqrt{3}}{ (3c-g^2) } g' &= -1
+    \end{align*}
+
+    Now, we can integrate with respect to $z$, using partial fractions.
+
+    \begin{align*}
+        \int \frac{2 \sqrt{3}}{3c-g^2} g' \, dz &= \int -1 \, dz \\
+        \int \frac{2 \sqrt{3}}{3c-g^2} \, dg &= -z + C \\
+        \text{Apply partial fractions: } \frac{2 \sqrt{3}}{(\sqrt{3c} - g)(\sqrt{3c} + g)} &= \frac{A}{\sqrt{3c} - g} + \frac{B}{\sqrt{3c} + g} \\
+        2 \sqrt{3} &= A(\sqrt{3c} + g) + B(\sqrt{3c} - g) \\
+        \text{Set } g = \sqrt{3c}: \quad 2\sqrt{3} &= A(2\sqrt{3c}) \implies A = \frac{1}{\sqrt{c}} \\
+        \text{Set } g = -\sqrt{3c}: \quad 2\sqrt{3} &= B(2\sqrt{3c}) \implies B = \frac{1}{\sqrt{c}} \\
+        \int \left( \frac{1/\sqrt{c}}{\sqrt{3c} - g} + \frac{1/\sqrt{c}}{\sqrt{3c} + g} \right) dg &= -z + C \\
+        \frac{1}{\sqrt{c}} \left( -\ln(\sqrt{3c} - g) + \ln(\sqrt{3c} + g) \right) &= -z + C \\
+        \frac{1}{\sqrt{c}} \ln \left( \frac{\sqrt{3c} + g}{\sqrt{3c} - g} \right) &= -z + C \\
+        \ln \left( \frac{\sqrt{3c} + g}{\sqrt{3c} - g} \right) &= -\sqrt{c}z + C\sqrt{c} \\
+        \text{Let } d = C\sqrt{c}: \quad \ln \left( \frac{\sqrt{3c} + g}{\sqrt{3c} - g} \right) &= -\sqrt{c}z + d
+    \end{align*}
+
+    Now we can solve for $g(z)$:
+
+    \begin{align*}
+        \ln \left( \frac{\sqrt{3c} + g}{\sqrt{3c} - g} \right) &= -\sqrt{c}z + d \\
+        \text{Exponentiate both sides: } \quad \frac{\sqrt{3c} + g}{\sqrt{3c} - g} &= e^{-\sqrt{c}z + d} \\
+        \text{Multiply by the denominator: } \quad \sqrt{3c} + g &= (\sqrt{3c} - g) e^{-\sqrt{c}z + d} \\
+        \text{Distribute the right side: } \quad \sqrt{3c} + g &= \sqrt{3c} e^{-\sqrt{c}z + d} - g e^{-\sqrt{c}z + d} \\
+        \text{Group } g \text{ terms on the left: } \quad g + g e^{-\sqrt{c}z + d} &= \sqrt{3c} e^{-\sqrt{c}z + d} - \sqrt{3c} \\
+        \text{Factor out } g \text{ and } \sqrt{3c}\text{: } \quad g(1 + e^{-\sqrt{c}z + d}) &= \sqrt{3c} (e^{-\sqrt{c}z + d} - 1) \\
+        \text{Divide to isolate } g(z)\text{: } \quad g(z) &= \sqrt{3c} \frac{e^{-\sqrt{c}z + d} - 1}{e^{-\sqrt{c}z + d} + 1} \\
+        \sqrt{3c} \frac{e^{-\sqrt{c}z + d} - 1}{e^{-\sqrt{c}z + d} + 1} &= \sqrt{3c} \tanh{\frac{1}{2} (\sqrt{x}z-d)}
+    \end{align*}
+
+    Now using our substitution $f = 3c-g^2$
+    \[
+      f(z) = 3c \sech \left( \frac{1}{2} (\sqrt{c}z-d) \right)
+    \]
+
+    And $d$ is jus ta shift of the shape so
+    \[
+        f(z) = 3c \sech^2 \left( \frac{1}{2} (\sqrt{c}z) \right)
+    \]
+
+    So the resulting traveling wave solution to the KdV equation is ($z=x-ct$)
+    \begin{align*}
+        u(x,t) &= 3c \sech^2 \left( \frac{1}{2} (\sqrt{c}(x-ct)) \right)\\
+        u(x,t) &= 3c \sech^2 \left( \frac{\sqrt{c}}{2} (x-ct) \right)
+    \end{align*}
+
+    This solution is called a \textbf{solitary wave} or \textbf{soliton} solution.
 \end{document}
