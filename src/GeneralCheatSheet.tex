@@ -1,0 +1,36 @@
+%! Author = jortuck
+%! Date = 4/13/26
+
+% Preamble
+\documentclass[12pt]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{parskip}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{hyperref} %LaTeX package to import graphics
+\graphicspath{{images/}} %configuring the graphicx package
+\DeclareMathOperator{\sech}{sech}
+
+% Document
+\begin{document}
+
+\textbf{Traveling Wave Ansantz:} $f(x-ct)$
+
+\textbf{Guess For Linear Autonomous Homogenous}: $f(x) = e^{\lambda x}$
+
+\textbf{Euler's Formula}:\\
+$e^{i \theta} = \cos(\theta) + i \sin{\theta}$\\
+$e^{-i \theta} = \cos(\theta) - i \sin{\theta}$
+
+\textbf{Hyperbolic Identities:}\\
+$e^{x} = \cosh(x) + \sinh(x)$\\
+$e^{-x} = \cosh(x) - \sinh(x)$
+$\sinh(x)  = \frac{e^x - e{-x}}{2}$
+$\cosh(x)  = \frac{e^x + e{-x}}{2}$
+$\tanh(x) = \frac{\sinh(x)}{\cosh(x) } $
+\end{document}
