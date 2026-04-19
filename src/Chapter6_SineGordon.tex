@@ -1,0 +1,87 @@
+
+% Preamble
+\documentclass[12pt, letterpaper]{article}
+\title{Chapter 6 - The Sine-Gordon Equation - Notes}
+\author{Jordan Tucker}
+\date{April 18, 2026}
+% Packages
+\usepackage{amsmath}
+\usepackage{parskip}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{hyperref} %LaTeX package to import graphics
+\graphicspath{{images/}} %configuring the graphicx package
+\DeclareMathOperator{\sech}{sech}
+
+% Document
+\begin{document}
+    \maketitle
+    \section{The Sine Gordon Equation}\label{sec:the-sine-gordon-equation}
+    Sine Gordon is good for wave fronts.
+
+    \[
+        u_{tt} - u_{xx} = \sin(u) = 0
+    \]
+
+    We will look at solutions to the traveling wave equation using the ansatz below:
+    \[
+        u(x,t) = f(x-ct)
+    \]
+    Let's take some derivatives:
+    \begin{align*}
+        u_{t} =  -c f'(x-ct) &\quad u_{tt} = c^2 f''(x-ct) \\
+        u_{x} = f'(x-ct) &\quad u_{xx} = f''(x-ct)
+    \end{align*}
+    Now we can substitute into $u_{tt} - u_{xx} + \sin(u)$:
+    \[
+        c^2 f'' - f'' + \sin(f)=0
+    \]
+    We can form a nicer equation by multiplying by $f'$
+    \begin{align*}
+        f'(c^2 f'' - f'' + \sin(f))&=0\\
+        c^2 f'' f' - f'' f' + \sin(f)f'&=0\\
+        f'' f' (c^2 - 1) + \sin(f)f'&=0
+    \end{align*}
+    We can now integrate to produce a first order equation
+    \[
+        \frac{1}{2} (c^2 -1) (f')^2 - \cos(f) = a
+    \]
+    with $a$ as some constant of integration.
+    $a$ can be different depending on the problem.
+    To determine $a$, we apply the decay conditions for a traveling wave front.
+    As the wave extends toward infinity ($y \to \infty$), the wave profile must flatten out.
+    Therefore, we assume the decay conditions:
+    \[
+        \lim_{y\to\infty} f(y) = 0 \quad \text{and} \quad \lim_{y\to\infty} f'(y) = 0
+    \]
+    Taking the limit of our integrated equation as $y \to \infty$:
+    \begin{align*}
+        a &= \lim_{y\to\infty} \left[ \frac{1}{2}(c^2-1)(f'(y))^2 - \cos(f(y)) \right] \\
+        a &= 0 - \cos(0) \\
+        a &= -1
+    \end{align*}
+    Substituting $a = -1$ back into our equation allows us to separate variables and solve for the wave front (kink) solution.
+
+    Substituting $a = -1$ back into our first-order equation gives:
+    \[
+        \frac{1}{2} (c^2 -1) (f')^2 - \cos(f) = -1
+    \]
+
+    We can rearrange this equation to solve for $(f')^2$:
+    \[
+        (f')^2 = 2\left(\frac{1 - \cos(f)}{1 - c^2}\right)
+    \]
+
+    Taking the square root of both sides gives us a separable differential equation:
+    \[
+        f' = \pm \sqrt{\frac{2}{1 - c^2}} \sqrt{1 - \cos(f)}
+    \]
+
+    Now, we separate the variables so that all terms with $f$ are on one side and terms with $x$ are on the other:
+    \[
+        \frac{df}{\sqrt{1 - \cos(f)}} = \pm \sqrt{\frac{2}{1 - c^2}} dx
+    \]
+
+    You are smart and can figure out the rest using partial fractions and stuff.
+\end{document}
