@@ -6,7 +6,11 @@
 \title{AMATH 353 HW5}
 \author{Jordan Tucker}
 \date{May 9, 2026}
+
 \renewcommand{\thesubsection}{(\alph{subsection})}
+\makeatletter
+\@addtoreset{subsection}{section}
+\makeatother
 
 % Packages
 \usepackage{amsmath}
@@ -79,4 +83,152 @@
     Therefor $b_n=0 \ \forall \ n  \in  \mathbb{Z}^+$
 
     The series fails at $x=\pi$ and $x = -\pi$ because of the jump discontinuities that exist there.
+
+    \subsection{$f(x)=e^x, \ L = \pi$}
+
+    Using the formula for $a_n$:
+    \begin{align*}
+        a_n = \frac{1}{\pi} \int_{-\pi}^{\pi} e^x \sin(n \pi) \,dx \\
+    \end{align*}
+    Using integration by parts with $u=\sin(nx)$, $du = n\cos(nx)$, $dv=e^x$, $v=e^x$
+    \begin{align*}
+        \int_{-\pi}^{\pi} e^x \sin(n \pi) \,dx &= \sin(nx)e^x - n \int e^x \cos(nx)  \\
+    \end{align*}
+    Using integration by parts again with $u=\cos(nx)$, $du = -n\sin(nx)$, $dv=e^x$, $v=e^x$
+    \begin{align*}
+        \int_{-\pi}^{\pi} e^x \sin(n \pi) \,dx &= \sin(nx)e^x - n \left( \cos(nx)e^x + n \int e^x \sin(nx) \,dx \right)  \\
+        \int_{-\pi}^{\pi} e^x \sin(n \pi) \,dx &= \sin(nx)e^x - n \cos(nx)e^x - n^2 \int e^x \sin(nx) \,dx   \\
+        \int_{-\pi}^{\pi} e^x \sin(n \pi) \,dx + n^2 \int_{-\pi}^{\pi} e^x \sin(nx) \,dx \right) ,\dx &= \sin(nx)e^x - n \cos(nx)e^x \Big|_{-\pi}^{\pi} \\
+        \int_{-\pi}^{\pi} e^x \sin(n \pi) \,dx (1 + n^2)  &= \sin(nx)e^x - n \cos(nx)e^x \Big|_{-\pi}^{\pi}\\
+        \int_{-\pi}^{\pi} e^x \sin(n \pi) \,dx &= \frac{\sin(nx)e^x - n \cos(nx)e^x}{1 + n^2} \Big|_{-\pi}^{\pi}
+    \end{align*}
+    We know that $\cos(n \pi) = \cos(-n\pi) = (-1)^n $
+    \begin{align*}
+        \int_{-\pi}^{\pi} e^x \sin(n \pi) \,dx &= \frac{-n(-1)^n e^{\pi}}{1+n^2} + \frac{n(-1)^n e^{-\pi}}{1+n^2}\\
+        \int_{-\pi}^{\pi} e^x \sin(n \pi) \,dx &= \frac{-n(-1)^n}{1+n^2} (e^{\pi} - e^{-\pi}) \\
+        a_n & = \frac{-n(-1)^n}{1+n^2 (\pi)} (e^{\pi} - e^{-\pi})
+    \end{align*}
+
+    For $b_n$, we can also use the formula:
+    \[
+        b_n = \frac{1}{\pi} \int_{-\pi}^{\pi} e^x \cos(nx) \,dx
+    \]
+    Using integration by parts, with $u=\cos(nx)$, $du = -n\sin(nx)$, $v=e^x$, $dv=e^x$.
+
+    \begin{align*}
+        \int_{-\pi}^{\pi} e^x \cos(nx) \,dx &= e^x \cos(nx) + n \int e^x \sin(nx)
+    \end{align*}
+
+    Using integration by parts again with $u=\sin(nx)$, $du=-n\cos(nx)$, $v=e^x$, $dv=e^x$.
+    \begin{align*}
+        \int_{-\pi}^{\pi} e^x \cos(nx) \,dx &= e^x \cos(nx) + n \sin(nx) - n^2 \int e^x \cos(nx)\\
+        \int_{-\pi}^{\pi} e^x \cos(nx) \,dx +  n^2 \int_{-\pi}^{\pi} e^x \cos(nx) \,dx &= e^x \cos(nx) + n \sin(nx) \Big|_{-\pi}^{\pi} \\
+        \int_{-\pi}^{\pi} e^x \cos(nx) \,dx (1+n^2) &= e^x \cos(nx) + n \sin(nx) \Big|_{-\pi}^{\pi}\\
+        \int_{-\pi}^{\pi} e^x \cos(nx) \,dx &= \frac{ e^x \cos(nx) + n \sin(nx)}{1+n^2} \Big|_{-\pi}^{\pi}\\
+        \int_{-\pi}^{\pi} e^x \cos(nx) \,dx &= \frac{e^{\pi}  \cos(n \pi)}{1+n^2} - \frac{e^{-\pi}  \cos(-n \pi)}{1+n^2}\\
+        \int_{-\pi}^{\pi} e^x \cos(nx) \,dx &= \frac{e^{\pi}  (-1)^n}{1+n^2} - \frac{e^{-\pi} (-1)^n}{1+n^2}\\
+        \int_{-\pi}^{\pi} e^x \cos(nx) \,dx &= \frac{(-1)^n}{1+n^2} (e^{\pi} - e^{-\pi})\\
+        b_n &= \frac{1}{\pi}\frac{(-1)^n}{1+n^2} (e^{\pi} - e^{-\pi})
+    \end{align*}
+    The series fails at $x=\pi$ and $x = -\pi$ because of the jump discontinuities that exist there.
+
+    \subsection{
+        $f(x)=
+        \begin{cases}
+            0, & -\pi \le x \le 0, \\
+            1-\dfrac{x}{\pi}, & 0 < x \le \pi
+        \end{cases},
+        \quad L=\pi$
+    }
+
+    Since the function is $0$ on the interval $-\pi \le x \le 0$, our bounds for our integrals only
+    have to go from $0$ to $\pi$.
+
+    For $b_0$:
+    \begin{align*}
+        b_n &= \frac{1}{\pi} \int_0^{\pi} (1-\frac{x}{n}) \,dx\\
+        &=  \frac{1}{\pi} \left[ x-\frac{x^2}{2\pi} \Big|_0^{\pi} \right]\\
+        &= \frac{1}{\pi} \left[ \pi - \frac{\pi^2}{2\pi} \right] \\
+        b_0 &= 1 - \frac{1}{2} = \frac{1}{2}
+    \end{align*}
+
+    For $a_n$:
+    \[
+        a_n = \int_0^{\pi} (1-\frac{x}{\pi}) \sin(nx) \,dx
+    \]
+    Integration by parts using the table method:
+    \begin{tabular}{ |c| c| }
+        \hline
+        $1-\frac{x}{\pi}$ & $\sin(nx)$ \\
+        $\frac{1}{\pi}$ & $-\frac{1}{n} \cos(nx)$ \\
+        $0$ & $-\frac{1}{n^2} \sin(nx)$ \\
+        \hline
+    \end{tabular}
+    \begin{align*}
+        a_n &= \frac{1}{\pi} \left[-(1-\frac{x}{\pi})\frac{1}{n} \cos(nx) - \frac{1}{\pi n^2}\sin(nx)  \right]_0^{\pi}\\
+        &= 0 - (\frac{-1}{n \pi})
+        a_n &= \frac{1}{n \pi}
+    \end{align*}
+
+    For $b_n$:
+    \[
+        b_n = \frac{1}{\pi} \int_{0}^{\pi} (1-\frac{x}{\pi}) \cos(nx) \,dx
+    \]
+    We can use integration by parts with the table method again:
+
+    \begin{tabular}{ |c| c| }
+        \hline
+        $1-\frac{x}{\pi}$ & $\cos(nx)$ \\
+        $\frac{1}{\pi}$ & $\frac{1}{n} \sin(nx)$ \\
+        $0$ & $-\frac{1}{n^2} \cos(nx)$ \\
+        \hline
+    \end{tabular}
+
+    \begin{align*}
+        b_n &= \frac{1}{\pi} \left[ (1-\frac{x}{\pi})\frac{1}{n} \sin(nx) - \frac{1}{\pi n^2}\cos(nx) \right]_0^{\pi}\\
+        &= \frac{1}{\pi} \left[ - \frac{-1^n}{n^2\pi} + \frac{1}{n^2 \pi} \right]\\
+        b_n &= \frac{1-(-1)^n}{\pi^2 n^2}
+    \end{align*}
+
+    The series fails at $x=0$ due to the jump discontinuity that exits there.
+
+    \newpage
+    \section*{Problem 2 - Another Separation of Variables IBVP}
+    Solve the finite-interval, \textbf{free-endpoint} wave equation IBVP given by
+    \setcounter{subsection}{0}
+    \subsection{Solve}
+
+    \begin{gather*}
+        \begin{cases}
+            u_{tt}=c^2u_{xx}, & x\in [0,3], t\ge 0, \\
+            u_x(0,t)=0, & t\ge 0, \\
+            u_x(3,t)=0, & t\ge 0, \\
+            u(x,0)=\cos^4(\frac{2}{3}\pi x), &  x \in [0,3],\\
+            u_t(x,0)=0, & x \in [0,3].
+        \end{cases}\\\\
+        u_x(0,t) = u_x(3t) = 0\\\\
+        u(x,t) = \frac{b_0}{2}+\sum_{n=1}^{\infty} b_n \cos(\frac{n\pi}{3}x) \cos(\frac{cn\pi}{3}t)\\
+        u(x,0) = \cos^4(\frac{2}{3}\pi x)\\
+        \text{Let $\theta = \frac{2}{3}\pi x$}\\
+        \cos^4(\theta) = (\cos^2(\theta))^2 = \left(\frac{1}{2} (1+\cos(2\theta)) \right)^2
+        \frac{1}{4}(1+2\cos(2\theta)+\cos^2(2\theta))\\
+        \frac{1}{4}(1+2\cos(2\theta)+\frac{1}{2}+\frac{1}{2}\cos(4\theta))\\
+        \frac{3}{8}+\frac{1}{2}\cos(2\theta)+\frac{1}{8}\cos(4\theta)\\
+        u(x,0) = \frac{3}{8}+\frac{1}{2}\cos(\frac{4}{3} \pi x) + \frac{1}{8}\cos(\frac{8}{3} \pi x)\\
+    \end{gather*}
+    From inspection, we can see that:
+    \begin{gather*}
+        n=4,\ a_4 = \frac{1}{2}\\
+        n=8,\ a_8 = \frac{1}{8}\\
+        n=0,\ a_0 = \frac{3}{4}\\
+    \end{gather*}
+    So the final equation is:
+    \[
+        u(x,t) = \frac{3}{8} + \frac{1}{2}\cos\left(\frac{4\pi}{3}x\right)\cos\left(\frac{4c\pi}{3}t\right) + \frac{1}{8}\cos\left(\frac{8\pi}{3}x\right)\cos\left(\frac{8c\pi}{3}t\right)
+    \]
+
+    \subsection{Plot}
+
+
+
 \end{document}
