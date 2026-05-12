@@ -1,0 +1,66 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[x11names, rgb]{xcolor}
+\usepackage{graphicx}
+\usepackage{fullpage}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+
+\newcommand{\nopagenumbers}{
+    \pagestyle{empty}
+}
+
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\providetoggle{questionnumbers}
+\settoggle{questionnumbers}{true}
+\newcommand{\noquestionnumbers}{
+    \settoggle{questionnumbers}{true}
+}
+
+\newcounter{questionCounter}
+\newenvironment{question}[2][\arabic{questionCounter}]{%
+    \addtocounter{questionCounter}{1}%
+    \setcounter{partCounter}{0}%
+    \vspace{.25in} \hrule \vspace{0.4em}%
+        \noindent{\bf \iftoggle{questionnumbers}{#1: }{}#2}%
+    \vspace{0.8em} \hrule \vspace{.10in}%
+}{$ $\newpage}
+
+\newcounter{partCounter}[questionCounter]
+\renewenvironment{part}[1][\alph{partCounter}]{%
+    \addtocounter{partCounter}{1}%
+    \vspace{.10in}%
+    \begin{indented}%
+       {\bf (#1)} %
+}{\end{indented}}
+
+\def\show#1{\ifdefempty{#1}{}{#1\\}}
+
+\newcommand{\header}{
+\begin{center}
+    {\Large \show\myhwname}
+    \show\myname
+    \today
+\end{center}}
+
+\newcommand{\myhwname}{AMATH 403 HW 5}
+\newcommand{\myname}{Jordan Tucker}
+
+\nopagenumbers
+
+\begin{document}
+\header
+
+\begin{question}{4.3.18. Use separation of variables to solve the Helmholtz boundary value problem
+    $\Delta u =u $,  $u(x, 0) = 0$, $u(x, 1) = f (x)$, $u(0, y) = 0$, $u(1, y) = 0$, on the unit square $ 0 < x$, $y < 1$.}
+
+\end{question}
+\end{document}
+
