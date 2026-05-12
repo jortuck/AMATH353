@@ -1,6 +1,6 @@
 \documentclass[letterpaper,11pt]{article}
 
-\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
 \usepackage{lmodern}
 \usepackage{enumitem}
 \usepackage{hyperref}
@@ -8,61 +8,67 @@
 \usepackage{graphicx}
 \usepackage{fullpage}
 \usepackage{etoolbox}
+
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{5pt plus 1pt}
+\setlength{\parskip}{6pt}
 
 \newcommand{\nopagenumbers}{
     \pagestyle{empty}
 }
 
 \newenvironment{indented}{
-    \list{}{}\item[]
+    \begin{list}{}{\leftmargin=1em}
+    \item[]
 }{
-    \endlist
+    \end{list}
 }
 
 \newtoggle{questionnumbers}
-\settoggle{questionnumbers}{true}
-\newcommand{\noquestionnumbers}{
-    \settoggle{questionnumbers}{true}
-}
+\toggletrue{questionnumbers}
 
 \newcounter{questionCounter}
-\newenvironment{question}[2][\arabic{questionCounter}]{%
-    \addtocounter{questionCounter}{1}%
-    \setcounter{partCounter}{0}%
-    \vspace{.25in} \hrule \vspace{0.4em}%
-        \noindent{\bf \iftoggle{questionnumbers}{#1: }{}#2}%
-    \vspace{0.8em} \hrule \vspace{.10in}%
-}{\newpage}
-
 \newcounter{partCounter}[questionCounter]
-\renewenvironment{part}[1][\alph{partCounter}]{%
-    \addtocounter{partCounter}{1}%
-    \vspace{.10in}%
-    \begin{indented}%
-       {\bf (#1)} %
-}{\end{indented}}
 
-\def\show#1{\ifdefempty{#1}{}{#1\\}}
+\newcommand{\question}[1]{%
+    \stepcounter{questionCounter}%
+    \setcounter{partCounter}{0}%
+    \vspace{0.25in}
+    \hrule
+    \vspace{0.4em}
+    \noindent\textbf{Question \thequestionCounter:\ }#1
+    \vspace{0.8em}
+    \hrule
+    \vspace{0.1in}
+}
 
-\newcommand{\header}{
-\begin{center}
-    {\Large \show\myhwname}
-    \show\myname
-    \today
-\end{center}}
+\newcommand{\qpart}{%
+    \stepcounter{partCounter}%
+    \begin{indented}
+    \textbf{(\alph{partCounter}) }
+}
+
+\newcommand{\closepart}{
+    \end{indented}
+}
 
 \newcommand{\myhwname}{AMATH 403 HW 5}
 \newcommand{\myname}{Jordan Tucker}
 
+\newcommand{\header}{
+    \begin{center}
+    {\Large \myhwname}\\
+    \myname\\
+    \today
+    \end{center}
+}
+
 \nopagenumbers
 
 \begin{document}
-\header
 
-\begin{question}{4.3.18. Use separation of variables to solve the Helmholtz boundary value problem
-    $\Delta u =u $,  $u(x, 0) = 0$, $u(x, 1) = f (x)$, $u(0, y) = 0$, $u(1, y) = 0$, on the unit square $ 0 < x$, $y < 1$.}
+    \header
+    \question{4.3.18. Use separation of variables to solve the Helmholtz boundary value problem
+        $\Delta u =u $,  $u(x, 0) = 0$, $u(x, 1) = f (x)$, $u(0, y) = 0$, $u(1, y) = 0$, on the unit square $ 0 < x$, $y < 1$.}
 
     \textbf{Using separation of variables:}
     \[
@@ -82,6 +88,4 @@
     \textbf{Divide by $v(x)w(y)$}
     \begin{gather*}
     \end{gather*}
-\end{question}
 \end{document}
-
