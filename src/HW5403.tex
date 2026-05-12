@@ -7,7 +7,7 @@
 \usepackage[x11names, rgb]{xcolor}
 \usepackage{graphicx}
 \usepackage{fullpage}
-
+\usepackage{etoolbox}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{5pt plus 1pt}
 
@@ -15,10 +15,13 @@
     \pagestyle{empty}
 }
 
-\def\indented#1{\list{}{}\item[]}
-\let\indented=\endlist
+\newenvironment{indented}{
+    \list{}{}\item[]
+}{
+    \endlist
+}
 
-\providetoggle{questionnumbers}
+\newtoggle{questionnumbers}
 \settoggle{questionnumbers}{true}
 \newcommand{\noquestionnumbers}{
     \settoggle{questionnumbers}{true}
@@ -31,7 +34,7 @@
     \vspace{.25in} \hrule \vspace{0.4em}%
         \noindent{\bf \iftoggle{questionnumbers}{#1: }{}#2}%
     \vspace{0.8em} \hrule \vspace{.10in}%
-}{$ $\newpage}
+}{\newpage}
 
 \newcounter{partCounter}[questionCounter]
 \renewenvironment{part}[1][\alph{partCounter}]{%
@@ -61,6 +64,24 @@
 \begin{question}{4.3.18. Use separation of variables to solve the Helmholtz boundary value problem
     $\Delta u =u $,  $u(x, 0) = 0$, $u(x, 1) = f (x)$, $u(0, y) = 0$, $u(1, y) = 0$, on the unit square $ 0 < x$, $y < 1$.}
 
+    \textbf{Using separation of variables:}
+    \[
+        u(x,y) = v(x)w(y)
+    \]
+    \textbf{Helmholtz equation:}
+    \begin{gather*}
+        \Delta u = u \\
+        u_{xx} + u_{yy} = u
+    \end{gather*}
+    \textbf{Using substitution:}
+    \begin{gather*}
+        u_{xx} = v''(x)w(y)\\
+        u_{yy} = v(x)w''(y)\\
+        v''(x)w(y) + v(x)w''(y) = v(x)w(y)
+    \end{gather*}
+    \textbf{Divide by $v(x)w(y)$}
+    \begin{gather*}
+    \end{gather*}
 \end{question}
 \end{document}
 
