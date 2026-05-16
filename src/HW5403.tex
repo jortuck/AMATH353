@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage{fullpage}
 \usepackage{etoolbox}
+\usepackage{mathtools}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt}
@@ -87,5 +88,141 @@
     \end{gather*}
     \textbf{Divide by $v(x)w(y)$}
     \begin{gather*}
+        \frac{v''(x)}{v(x)}+\frac{w''(y)}{w(y)} = 1\\
+        \frac{v''(x)}{v(x)} =  1 - \frac{w''(y)}{w(y)} = \lambda
+    \end{gather*}
+    \textbf{Finding the first ODE}:
+    \begin{gather*}
+        v''(x) = \lambda v(x)\\
+        v''(x) - \lambda v(x) =0
+    \end{gather*}
+    \textbf{Finding the second ODE:}
+    \begin{gather*}
+          \frac{- w''(y)}{w(y)} = \lambda -1 \\
+        -w''(y) = (\lambda -1)(w(y))\\
+        w''(y) - (1 - \lambda) w(y) = 0
+    \end{gather*}
+    \textbf{Based on the given boundary conditions}
+    \begin{gather*}
+        u(0,y), \ v(0)w(y) =0 \implies v(0)=0\\
+        u(1,y), \ v(1)w(y) = 0 \implies v(1)=0
+    \end{gather*}
+    \textbf{Solving $v''(x) - \lamnda v(x) =0$}
+
+    Case $\lambda = 0$:
+    \begin{gather*}
+        v''(x) = 0\\
+        v(x) = Ax +B\\
+        v(0) = B = 0\\
+        v(1) = A(1) + 0 = 0\\
+        v(x) = 0
+    \end{gather*}
+    Case 2 $\lambda > 0, \ \lambda = k^2$:
+    \begin{gather*}
+        v''(x) - k^2 v(x) = 0\\
+        v(x) = Ae^{kx} + Be^{-kx}\\
+        v(0) = Ae^{0} + Be^{0} = 0\\
+        v(1) = Ae^{k} + Be^{-k} = 0\\
+    \end{gather*}
+    Case $\lambda < 0, \ \lambda = -k^2$
+    \begin{gather*}
+        v''(x) + k^2 v(x) = 0\\
+        v(x) = A\cos(kx) + B \sin(kx)\\
+        v(0) = A(1) + B (0) = 0 \implies A = 0 \\
+        v(1) = (0) \cos(k) + B \sin(k) = 0\\
+        \sin(k) = 0 \implies k = n\pi, \ n = 1,2,3,\dots
+    \end{gather*}
+    \textbf{Solving $w(y)$}:
+
+    \begin{gather*}
+        \lambda_n = -(n \pi)^2 \\
+        w''(y) - (1- \lambda_n)w(y) = 0\\
+        w''(y) - (1+n^2 \pi^2)w(y) =0\\
+        \\
+        \mu_n = \sqrt{1+n^2\pi^2}\\
+        w_n(y) = C_n \cosh(\mu_n y) + D_n \sinh(\mu_n y)\\
+        u(x,0)=0\\
+        w(0) = C_n \cosh(0) + D_n \sinh(0) = 0\\
+        C_n(1) + D_n(0) \implies C_n = 0\\
+        W_n(y) = D_n\sinh(y \sqrt{1+n^2 \pi^2})
+    \end{gather*}
+    \textbf{By superposition:}
+    \begin{gather*}
+        u(x,y) = \sum_{n=1}^{\infty} b_n \sin(n\pix)\sinh(y\sqrt{1+n^2 \pi^2})
+    \end{gather*}
+    \textbf{Finding $b_n$}:
+    \begin{gather*}
+        u(x,1) = f(x)\\
+        f(x) = \sum_{n=1}^{\infty} b_n \sin(n\pix)\sinh(y\sqrt{1+n^2 \pi^2})\\
+        b_n\sinh(y\sqrt{1+n^2 \pi^2}) = 2 \int_0^1 f(x) \sin(n x \pi) \,dx\\
+        b_n = \frac{2}{\sinh(y\sqrt{1+n^2 \pi^2})} \int_0^1 f(x) \sin(n x \pi) \,dx
+    \end{gather*}
+    \newpage
+    \question{Give an example of functions f and g, along with an explicit solution u, such that u attains
+    its maximum value at an interior point of the domain D.}
+    \begin{gather*}
+        -\Delta u = f \\
+        \text{In the unit open disk}\\
+        D\coloneqq \{(x,y):x^2 + y^2 <1\}\\
+        \text{Dirichlet boundary on the unit circle $C$ which is the boundary}\\
+        u=g, \ \partial D = C = \{(x,y):x^2 + y^2 <1\}
+    \end{gather*}
+
+    Use a function that has its peak at the interior:
+    \[
+        1-x^2-y^2
+    \]
+    Evaluate at boundary:
+    \begin{align*}
+        u(x,y) &= 1 - (x^2 + y^2)\\
+        &= 1 - 1\\
+        &= 0\\
+        g(x,y) &= 0
+    \end{align*}
+    \begin{gather*}
+        \Delta u = f \\
+        -(u_{xx} + y_{yy}) = f\\
+        -(-2 + -2) = f\\
+        f(x,y) = 4\\
+        \\
+        u(x,y) = 1 - x^2 - y^2\\
+        f(x,y) = 4\\
+        g(x,y) = 0\\
+    \end{gather*}
+    \newpage
+
+    \question{Textbook Problem 7.1.5}
+    \qpart{Prove $\hat{\delta}(k) = \frac{1}{\sqrt{2\pi}}$}
+    \begin{gather*}
+            \hat{f}(k)=\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(x)\, e^{-ikx}\, dx\\
+            \hat{\delta}(k)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} \delta(x)\, e^{-ikx}\, dx\\
+            \\
+            f(x) =  e^{-ikx}\\
+            \int_{-\infty}^{\infty} \delta(x)\, f(x)\, dx\\
+    \end{gather*}
+    \textbf{Using the sifting property:}
+    \begin{gather*}
+        \int_{-\infty}^{\infty} \delta(x)\, f(x)\, dx = f(0)\\
+        \int_{-\infty}^{\infty} \delta(x)\, e^{-ikx}\, dx = f(0)\\
+        f(0) =  e^{-ik0} =  e^{0} = 1\\
+        \textbf{Thus}\\
+        \hat{\delta(k)} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \delta(x)\, f(x)\, dx = \frac{1}{\sqrt{2\pi}}\\
+        \hat{\delta(k)} = \frac{1}{\sqrt{2\pi}} (1) = \frac{1}{\sqrt{2\pi}}
+    \end{gather*}
+    \closepart
+    \qpart{Use the Fourier inversion formula and part (a) to find the Fourier transform of $e^{i\omega x}, \omega \in \mathbb{R}$}
+    \begin{gather*}
+        f(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \hat{f}(k) e^{ikx} \, dk\\
+        \text{We know } f(x) = \delta(x), \ \hat{f}(k) = \frac{1}{\sqrt{2\pi}}\\
+        \delta(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}  \frac{1}{\sqrt{2\pi}} e^{ikx} \,dk\\
+        \delta(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ikx} \, dk \\
+        \text{Change Variables}\\
+        \delta(u) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{iku} \, dk\\
+        \delta(u) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ixu} \, dx\\
+        \int_{-\infty}^{\infty} e^{iux} \, dx = 2\pi \delta(u)\\
+        \\
+        \text{Using fourier transform:}
+        \hat{g}(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} g(x) e^{-ikx} \,dx
+        \hat{g}(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} e^{i\omega x} e^{-ikx} \, dx
     \end{gather*}
 \end{document}
