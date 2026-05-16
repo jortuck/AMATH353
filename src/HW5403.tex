@@ -221,8 +221,26 @@
         \delta(u) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{ixu} \, dx\\
         \int_{-\infty}^{\infty} e^{iux} \, dx = 2\pi \delta(u)\\
         \\
-        \text{Using fourier transform:}
-        \hat{g}(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} g(x) e^{-ikx} \,dx
-        \hat{g}(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} e^{i\omega x} e^{-ikx} \, dx
+        \text{Using fourier transform:} \\
+        g(x) = e^{i\omega x} \\
+        \hat{g}(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} g(x) e^{-ikx} \,dx \\
+        \hat{g}(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} e^{i\omega x} e^{-ikx} \, dx\\
+        \hat{g}(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} e^{ix(\omega - k)} \, dx\\
+        \\
+        \text{Using what we found earlier}\\
+        \int_{-\infty}^{\infty} e^{i x u} \, dx = 2\pi \delta(u)\\
+        u = \omega - k \\
+        \int_{-\infty}^{\infty} e^{ix (\omega - k)} \, dx = 2\pi \delta(\omega - k)\\
+         = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} g(x) e^{-ikx} \,dx = \frac{1}{\sqrt{2\pi}} 2\pi \delta(\omega - k) \\
+        \hat{g}(k) = \frac{1}{\sqrt{2\pi}} 2\pi \delta(\omega - k)
     \end{gather*}
+    \closepart
+    \qpart{Use part (b) to find the Fourier transform of $\sin(\omega x)$.}
+        \begin{align*}
+            \sin(\omenga x) &= \frac{e^{i \omega x} - e^{-i \omega x}}{2i}\\
+            \mathcal{F}(\sin(\omenga x)) &= \mathcal{F}(\frac{e^{i \omega x} - e^{-i \omega x}}{2i})\\
+            &= \frac{1}{2i} \mathcal{F}(e^{i \omega x}) - \frac{1}{2i} \mathcal{F}(e^{-i \omega x})\\
+            &= \frac{1}{2i} \frac{1}{\sqrt{2\pi}} 2\pi \delta(\omega - k) - \frac{1}{2i} \frac{1}{\sqrt{2\pi}} 2\pi \delta(\omega + k)\\
+        \end{align*}
+    \closepart
 \end{document}
