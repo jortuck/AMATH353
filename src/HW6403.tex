@@ -1,0 +1,173 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[x11names, rgb]{xcolor}
+\usepackage{graphicx}
+\usepackage{fullpage}
+\usepackage{etoolbox}
+\usepackage{mathtools}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newcommand{\nopagenumbers}{
+    \pagestyle{empty}
+}
+
+\newenvironment{indented}{
+    \begin{list}{}{\leftmargin=1em}
+    \item[]
+}{
+    \end{list}
+}
+
+\newtoggle{questionnumbers}
+\toggletrue{questionnumbers}
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+
+\newcommand{\question}[1]{%
+    \stepcounter{questionCounter}%
+    \setcounter{partCounter}{0}%
+    \vspace{0.25in}
+    \hrule
+    \vspace{0.4em}
+    \noindent\textbf{Question \thequestionCounter:\ }#1
+    \vspace{0.8em}
+    \hrule
+    \vspace{0.1in}
+}
+
+\newcommand{\qpart}{%
+    \stepcounter{partCounter}%
+    \begin{indented}
+    \textbf{(\alph{partCounter}) }
+}
+
+\newcommand{\closepart}{
+    \end{indented}
+}
+
+\newcommand{\myhwname}{AMATH 403 HW 6}
+\newcommand{\myname}{Jordan Tucker}
+
+\newcommand{\header}{
+    \begin{center}
+    {\Large \myhwname}\\
+    \myname\\
+    \today
+    \end{center}
+}
+
+\nopagenumbers
+
+\begin{document}
+    \header
+    \question{(6.2.4) The boundary value problem $\frac{d}{dx}\left(c(x) \frac{du}{dx}\right)=f(x),\ u(0) = u(1) = 0$
+        models the displacement $u(x)$ of a nonuniform elastic bar with stiffness $c(x) = \frac{1}{1+x^2}$ for $0 \leq x \leq 1 $}
+    \qpart{Find the displacement when the bar is subjected to a constant external force, $f\equiv1$}
+    \begin{gather*}
+        \frac{d}{dx} \left(c(x) \frac{du}{dx} \right) = f(x)\\
+        \frac{d}{dx} \left(\frac{1}{1+x^2} \frac{du}{dx} \right) = f(x)\\
+        \int \frac{d}{dx} \left(\frac{1}{1+x^2} \frac{du}{dx} \right) =  \int f(x)\\
+        f(x)=1\\
+        \int \frac{d}{dx} \left(\frac{1}{1+x^2} \frac{du}{dx} \right) =  \int 1\\
+        \frac{1}{1+x^2} \frac{du}{dx} = x + C \\
+        \frac{du}{dx} = (x + C (1+x^2)\\
+        \frac{du}{dx} = x + x^3 + C + Cx^2\\
+        u(x) = \frac{x^2}{2} + \frac{x^4}{4} + Cx + C \frac{x^3}{3} + D\\\\
+    \end{gather*}
+    Initial Conditions
+    \begin{gather*}
+        u(0) = \frac{0^2}{2} + \frac{0^4}{4} + C(0) + C \frac{0^3}{3} + D=0\\
+        D=0
+    \end{gather*}
+    \begin{gather*}
+        u(1) = \frac{1}{2} + \frac{1}{4} + C + C \frac{1}{3} = 0 \\
+        \frac{3}{4} + \frac{4}{3} C = 0\\
+        \frac{4}{3} C = \frac{-3}{4}\\
+        C=\frac{-9}{16}
+    \end{gather*}
+    Substitute C and D
+    \[
+        u(x) = \frac{x^2}{2} + \frac{x^4}{4} - \frac{9}{16} x -\frac{3}{16} x^2
+    \]
+    \closepart
+    \qpart{Find the Green’s function for the boundary value problem.}
+    \begin{gather*}
+        \frac{d}{dx} \left(\frac{1}{1+x^2}\frac{dG}{dx} \right) = \delta(x-\eta)\\
+        G(0, \eta) = G(1,\eta) = 0
+    \end{gather*}
+    \begin{gather*}
+        \frac{1}{1+x^2} \frac{dG}{dx} = A \implies \frac{dG_1}{dx} = A(1+x^2)\\
+        G_1(x) = A(x+\frac{x^3}{3}) + C, \ G_1(0) = 0\\
+        C = 0\\
+        G_1(x) = A(x+\frac{x^3}{3})
+    \end{gather*}
+    \begin{gather*}
+        G_2(x) = B(x+\frac{x^3}{3})+D\\
+        G_2(1) = 0\\
+        B(1+\frac{1}{3}) + D = 0 \implies \frac{4}{3} B + D =0\\
+        D = - \frac{4}{3}B\\
+        G_2(x) = B(x+\frac{x^3}{3}-\frac{4}{3})
+    \end{gather*}
+    \begin{gather*}
+        G_1(\eta) = G_2(\eta)\\
+        A(\eta + \frac{\eta^3}{3}) = B(\eta+\frac{\eta^3}{3} - \frac{4}{3})
+    \end{gather*}
+    Jump Condition
+    \begin{gather*}
+        \int_{\eta-\epsilon}^{\eta+\epsilon}
+    \end{gather*}
+    \closepart
+    \newpage
+    \question{(7.2.7) If $f(x)$ has Fourier transform $\hat{f}(k)$, which function has Fourier transform $\frac{\hat{f}(k)}{k}$}
+    We want to find $\hat{g}(k) = \frac{\hat{f}(k)}{k}$
+    \\
+    \\
+    We can use the derivative property here:
+    \[
+        \mathcal{F}(g') = ik\hat{g}(k)
+    \]
+    \begin{gather*}
+        \hat{g}(k) = \frac{\hat{f}(k)}{k}\\\\
+        \text{Multiply by $ik$}\\
+        ik\hat{g}(k) = i\hat{f}(k) \\\\
+        \text{Substitute $\mathcal{F}(g') = ik\hat{g}(k)$}\\
+        \mathcal{F}(g') = \mathcal{F}(if(x))\\\\
+        \text{The Fourier transformations are equal on both sides so the functions must be equal}\\
+        g'(x) = if(x)\\\\
+        \text{We can integrate both sides}\\
+        \int g'(x) \,dx = i\int f(x) \,dx\\
+        g(x) = i\int f(x) \,dx
+    \end{gather*}
+    Our function is $g(x) = i\int f(x) \,dx$ where $\hat{g}(k) = \frac{\hat{f}(k)}{k}$.
+    \newpage
+    \question{(7.3.8) Use the Fourier transform to find an integral formula for a bounded solution to the Airy differential equation
+    $\frac{d^2u}{dx^2} =xu$}
+    \begin{gather*}
+        \frac{d^2u}{dx^2} = xu\\
+        \mathcal{F}(u'') = \mathcal{F}(xu)\\\\
+        \text{Using the derivative property}\\\\
+        \mathcal{F}(u'') = (ik)^2 \hat{u}(k) = -k^2 \hat{u}(k)\\\\
+        \hat{u}(k) = \frac{1}{\sqrt{2 \pi}} \int_{\infty}^{\infty} u(x)e^{-ikx} \,dx\\
+        \frac{d\hat{u}}{dk} =  \frac{1}{\sqrt{2 \pi}} \int_{\infty}^{\infty} (-ix)u(x)e^{-ikx} \, dx\\\\
+        \text{Divide both sides by $-i$}\\\\
+        \frac{i d\hat{u}}{dk} = \mathcal{F}(xu)\\\\
+        \text{Substitute $\mathcal{F}(xu) = -k^2 \hat{u}(k)$}\\\\
+        -k^2 \hat{u}(k) = \frac{i d\hat{u}}{dk}\\
+    \end{gather*}
+    \begin{gather*}
+        \text{Solve ODE}\\\\
+        -k^2 \hat{u}(k) = \frac{i d\hat{u}}{dk}\\\\
+        \frac{d\hat{u}}{\hat{u}} = i k^2 \, dk \\
+        \ln(\hat{u}) = i \frac{k^3}{3} + C\\
+        \hat{u}(k) = Ae^{i \frac{k^3}{3}}\\
+        u(x) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} A e^{i \frac{k^3}{3}} e^{ikx} \,dk\\
+        u(x) = \frac{A}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} e^{i \frac{k^3}{3}} e^{ikx} \,dk
+    \end{gather*}
+\end{document}
