@@ -121,7 +121,30 @@
     \end{gather*}
     Jump Condition
     \begin{gather*}
-        \int_{\eta-\epsilon}^{\eta+\epsilon}
+        \int_{\eta-\epsilon}^{\eta+\epsilon} \frac{d}{dx} \left(\frac{1}{1+x^2}\frac{dG}{dx} \right) \,dx = \int_{\eta-\epsilon}^{\eta+\epsilon} \delta(x-\eta) \, dx\\
+        \frac{1}{1+\eta^2} G'_2(\eta) - \frac{1}{1+\eta^2} G'_1(\eta) = 1\\
+        G'_2(\eta) - G'_1(\eta) = 1+\eta^2\\
+        B-A = 1\\
+        B = A+1
+    \end{gather*}
+    \begin{align*}
+        A(\eta + \frac{\eta^3}{3}) &= (A+1)(\eta + \frac{\eta^3}{3} - \frac{4}{3})\\
+        A(\eta + \frac{\eta^3}{3}) &= A(\eta + \frac{\eta^3}{3} - \frac{4}{3}) + (\eta + \frac{\eta^3}{3}-\frac{4}{3})\\
+        & = A(\eta + \frac{\eta^3}{3}) - \frac{4}{3} A + \eta + \frac{\eta^3}{3} -\frac{4}{3}\\
+        0&= - \frac{4}{3} A + \eta + \frac{\eta^3}{3} - \frac{4}{3}\\
+        \frac{4}{3} &= \eta + \frac{\eta^3}{3} -\frac{4}{3}\\
+        \frac{4}{3} A &= \eta + \frac{\eta^3}{3} -\frac{4}{3}\\
+        A &= \frac{3}{4}\eta + \frac{1}{4}\eta^3 - 1\\
+    \end{align*}
+    \[
+        B + \left(\frac{3}{4} \eta + \frac{1}{4}\eta^3 -1\right) +1 \implies B = \frac{3}{4}\eta + \frac{1}{4}\eta^3
+    \]
+    Final $G(x,\eta)$\\
+    \begin{gather*}
+        G(x,\eta) = \begin{cases}
+                        \left(\frac{3}{4} \eta + \frac{1}{4} \eta^3 -1\right) \left(x + \frac{x^3}{3}\right) \ \text{for} \ 0 \leq x \leq \eta\\
+                        \left(\frac{3}{4} \eta + \frac{1}{4} \eta^3 \right)\left(x+\frac{x^3}{3}-\frac{4}{3}\right)\ \text{for} \ \eta < x \leq 1\\
+        \end{cases}
     \end{gather*}
     \closepart
     \newpage
