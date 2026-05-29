@@ -1,0 +1,105 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[x11names, rgb]{xcolor}
+\usepackage{graphicx}
+\usepackage{fullpage}
+\usepackage{etoolbox}
+\usepackage{mathtools}
+
+
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}{{\rm d}}
+\DeclareMathOperator{\sech}{sech}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newcommand{\nopagenumbers}{
+    \pagestyle{empty}
+}
+
+\newenvironment{indented}{
+    \begin{list}{}{\leftmargin=1em}
+    \item[]
+}{
+    \end{list}
+}
+
+\newtoggle{questionnumbers}
+\toggletrue{questionnumbers}
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+
+\newcommand{\question}[1]{%
+    \stepcounter{questionCounter}%
+    \setcounter{partCounter}{0}%
+    \vspace{0.25in}
+    \hrule
+    \vspace{0.4em}
+    \noindent\textbf{Question \thequestionCounter:\ }#1
+    \vspace{0.8em}
+    \hrule
+    \vspace{0.1in}
+}
+
+\newcommand{\qpart}{%
+    \stepcounter{partCounter}%
+    \begin{indented}
+    \textbf{(\alph{partCounter}) }
+}
+
+\newcommand{\closepart}{
+    \end{indented}
+}
+
+\newcommand{\myhwname}{AMATH 353 HW 7}
+\newcommand{\myname}{Jordan Tucker}
+
+\newcommand{\header}{
+    \begin{center}
+    {\Large \myhwname}\\
+    \myname\\
+    \today
+    \end{center}
+}
+
+\nopagenumbers
+% Document
+\begin{document}
+    \header
+    \question{
+        \textbf{ An Easier Shock Solution}\\
+        One setting where the method of characteristics fails is when
+        the characteristics intersect and the solution becomes infinitely steep.
+        This leads to the formation of \textit{shock wave}, and
+        we saw that the shock moves along a characteristic
+        $(x_s(t),t)$ which can be determined from Rankine-Hugoniot condition
+        \[
+            \frac{dx_s(t)}{dt} =\frac{\phi(u^+)-\phi(u^-)}{u^+-u^-}.
+        \]
+        Enforcing the Rankine-Hugoniot condition, determine
+        the shock solution of the IVP
+        \[
+            \begin{cases}
+                u_t + uu_x = 0, & x \in \R, t \ge 0,\\
+                u(x,0)= u_0(x), & x \in \R,
+            \end{cases}
+            \quad \text{where}\quad
+            u_0(x) =
+            \begin{cases}
+                2, &x<-1,\\
+                1-x, & |x|\le 1.\\
+                0, &x>1.\\
+            \end{cases}
+        \]
+    }
+\end{document}
