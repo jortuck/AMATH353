@@ -93,7 +93,45 @@
         whose initial data is the derivative of the delta function at a fixed
         position \(\xi\).
     }
-
+    \begin{gather*}
+        u_t = u_{xx}\\
+        \cF{u_t} = \frac{\partial \hat{u}}{\partial t}\\
+        \cF{u_{xx}} = (ik)^2 \hat{u} = -k^2\hat{u}
+    \end{gather*}
+    Form and solve the ODE
+    \begin{align*}
+        \frac{\partial \hat{u}}{\partial t} &= -k^2 \hat{u}\\
+        \frac{\partial \hat{u}}{\hat{u}} &= -k^2 \partial t\\
+        \ln(\hat{u}) &= -k^2 t + A(K)\\
+        \hat{u}(t,k) &= A(k)e^{-k^2 t}
+    \end{align*}
+    Transform initial condition
+    \begin{gather*}
+        \hat{f}(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(x)e^{-ikx} \, dx\\
+        \hat{u}(0,k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}  \delta'(x-\xi) e^{-ikx} \, dx\\
+    \end{gather*}\
+    \[
+        f(x) = e^{-ikx},\ f'(x) = -ike^{-ikx}
+    \]
+    \begin{gather*}
+        \hat{u}(0,k) = \frac{1}{\sqrt{2 \pi}} \left(- (-ike^{-ik \xi}) \right) = \frac{ik}{\sqrt{2 \pi}} e^{-ik\xi}\\
+        \hat{u}(0,k) = A(k)e^0 = A(k) \\
+        A(k)= \frac{ik}{\sqrt{2\pi}}e^{-ik\xi}\\
+        \hat{u}(t,k) = \frac{ik}{\sqrt{2\pi}}e^{-ik\xi} e^{-k^{2}t}
+    \end{gather*}
+    Use inverse fourier transform
+    \begin{gather*}
+        \hat{u}(t,k) =ik \left(\frac{1}{\sqrt{2\pi}}e^{-ik\xi} e^{-k^{2}t} \right)\\
+        \hat{v}(t,k) =\frac{1}{\sqrt{2\pi}}e^{-ik\xi} e^{-k^{2}t}\\
+        v(t,k) = \cF^{-1} \left(\frac{1}{\sqrt{2\pi}}e^{-ik\xi} e^{-k^{2}t} \right) = \frac{1}{\sqrt{4 \pi t}}e^{- \frac{(x-\xi)^2}{4t}}\\
+    \end{gather*}
+    Since $ik$ means take the spacial derivative:
+    \begin{gather*}
+        u(t,x) = \frac{\partial}{\partial x} v(t,x)\\
+        u(t,x) = \frac{\partial}{\partial x} \left(\frac{1}{\sqrt{4 \pi t}}e^{- \frac{(x-\xi)^2}{4t}}\right)\\
+        u(t,x) = \frac{1}{4\pi t} \left( e^{- \frac{(x-\xi)^2}{4t}}\right)\left(- \frac{x-\xi}{2t}\right)\\
+        u(t,x) = -\frac{x-\xi}{4\sqrt{\pi} t^{3/2}} e^{-\frac{(x-\xi)^2}{4t}}
+    \end{gather*}
     \closepart
 
     \qpart{
@@ -101,6 +139,185 @@
         \(\partial F / \partial x\) of the fundamental solution
         \(F(t,x;\xi)\).
         Explain why this observation should be valid.}
+     \begin{gather*}
+         F(t,x;\xi) = \frac{1}{\sqrt{4\pi t}} e^{- \frac{(x-\xi)^2}{4t}}\\
+         u(t,x) = -\frac{x-\xi}{4\sqrt{\pi} t^{3/2}} e^{-\frac{(x-\xi)^2}{4t}}
+     \end{gather*}
+    Take the spacial derivative of $F$
+    \begin{gather*}
+        \frac{\partial F}{\partial x} = \frac{1}{\sqrt{4\pi t}} \left(- \frac{x-\xi}{2t} \right) \left(e^{-\frac{(x-\xi)^2}{4t}}\right)
+        = -\frac{x-\xi}{4\sqrt{\pi} t^{3/2}} e^{-\frac{(x-\xi)^2}{4t}}\\
+        u(t,x) - \frac{\partial F}{\partial x} = \left(-\frac{x-\xi}{4\sqrt{\pi} t^{3/2}} e^{-\frac{(x-\xi)^2}{4t}}\right)
+        - \left(-\frac{x-\xi}{4\sqrt{\pi} t^{3/2}} e^{-\frac{(x-\xi)^2}{4t}}\right) = 0
+    \end{gather*}
+    $\frac{\partial F}{\partial x}$ is a solution to the heat equation, and it fits the initial condition $u(0,x) = \delta'(x-\xi)$ because the
+    heat equation is linear with constant coefficients.
+    Because solutions to the initial value problem for the heat equation are unique, $\frac{\partial F}{\partial x}$ must be the exact same function as our solution $u(t,x)$.
+    \closepart
+    \newpage
+    \question{(8.1.17) Find the fundamental solution for the cable equation $vt = \gamma v_{xx} - \alpha v$ on the real line.}
+    Fundamental solution means
+    \[
+        v(0,x)  = \delta(x)\\
+    \]
+    We can make the guess $v(t,x) = e^{-\alpha t} u(t,x)$
+    \begin{align*}
+        v_t &= (-\alpha e^{-\alpha t} u) + e^{-\alpha t} (u_t)\\
+        v_t &= e^{-\alpha t} (u_t - \alpha u)
+    \end{align*}
+    \begin{align*}
+        v_x &= e^{-\alpha t} u_x\\
+        v_{xx} &= e^{-\alpha t} u_{xx}
+    \end{align*}
+    Substitute back into ODE
+    \begin{align*}
+        e^{-\alpha t} (u_t - \alpha u) &= \gamma(e^{-\alpha t} u_{xx}) - \alpha (e^{-\alpha t} u(t,x))\\
+        u_t - \alpha u &= \gamma u_{xx} - \alpha u\\
+        u_t &= \gamma u_{xx}
+    \end{align*}
+    It looks just like the heat equation
+    \begin{align*}
+        v(0,x) &= u(0,x)\\
+        \delta(x) &= u (0,x)
+    \end{align*}
+    $u(t,x)$ is the fundamental solution to the heat equation.
+    \begin{gather*}
+        u(t,x) = \frac{1}{\sqrt{4 \pi \gamma} t} e^{-\frac{x^2}{4 \gamma t}}\\
+        v(t,x) = e^{-\alpha t} \left( \frac{1}{\sqrt{4 \pi \gamma t}} e^{-\frac{x^2}{4 \gamma t}} \right)\\
+        v(t,x) = \frac{1}{\sqrt{4 \pi \gamma t}} e^{-\left( \frac{x^2}{4 \gamma t} + \alpha t \right)}
+    \end{gather*}
+    \newpage
+    \question{(8.3.5) Consider the parabolic equation
+        \[
+            \frac{\partial u}{\partial t}
+            =
+            x \frac{\partial^2 u}{\partial x^2}
+            +
+            \frac{\partial u}{\partial x},
+            \qquad
+            1 < x < 2,
+        \]
+        with initial and boundary conditions
+        \[
+            u(0,x)=f(x),
+            \qquad
+            u(t,1)=\alpha(t),
+            \qquad
+            u(t,2)=\beta(t).
+        \]
+    }
 
+    \qpart{
+        State and prove a version of the Maximum Principle for this problem.
+    }
+
+    If $u(t,x)$ is a smooth solution to $u_t = xu_{xx} + u_x$ on the domain $R = \left\{(t,x):0 \leq t \leq T, \ 1\leq x \leq 2 \right\}$
+    then the maximum value of $u$ is at a point on the boundary of $R$.
+
+    We will prove this by contradiction.
+    We can start by assuming $u(t,x)$ has its maximum value at some interior point $u(t_0,x_0)$.
+    Since it is the maximum value, the derivatives must be equal to zero.
+    \begin{gather*}
+        u_t(t_0,x_0) = 0\\
+        u_x(t_0,x_0) = 0
+    \end{gather*}
+    And the second derivative must be less than or equal to zero.
+    \[
+        u_{xx}(t_0,x_0) \leq 0
+    \]
+    We can plug in our values at $(t_0,x_0)$ in to our ODE:
+    \begin{align*}
+        u_t(t_0,x_0) &= x u_{xx}(t_0,x_0) + u_x(t_0,x_0)\\
+        0 &= x (\leq 0) + 0
+    \end{align*}
+    This simplifies down to $0 \leq 0$, which is true but does not provide a full contradiction.
+
+   We can define $v(t,x)$ which is perturbed:
+    \[
+        v(t,x) = u(t,x) - \epsilon t
+    \]
+    where $\epsilon > 0$ is an arbitrarily small number.
+    Since $u(t,x) = v(t,x) + \epsilon t$, we can find the derivatives:
+    \begin{gather*}
+        u_t = v_t + \epsilon \\
+        u_x = v_x \\
+        u_{xx} = v_{xx}
+    \end{gather*}
+    Subbing these into the original PDE gives us the PDE for $v$:
+    \[
+        v_t + \epsilon = x v_{xx} + v_x \implies v_t = x v_{xx} + v_x - \epsilon
+    \]
+   Now we can assume $v(t,x)$ has its maximum at some interior point $(t_0, x_0)$.
+   The spatial derivatives are zero and less than 0:
+    \begin{gather*}
+        v_x(t_0,x_0) = 0\\
+        v_{xx}(t_0,x_0) \leq 0
+    \end{gather*}
+    For the time derivative, since we are defining our domain up to time $T$, $v_t$ could be zero positive if the maximum happens
+    right at the very end of the time limit $T$.
+    \[
+        v_t(t_0,x_0) \geq 0
+    \]
+    We can substitute these values at $(t_0, x_0)$ into our new ODE for $v$:
+    \begin{align*}
+        v_t(t_0,x_0) &= x_0 v_{xx}(t_0,x_0) + v_x(t_0,x_0) - \epsilon\\
+        v_t(t_0,x_0) &= x_0 (\leq 0) + 0 - \epsilon
+    \end{align*}
+    Since our domain is $1 \leq x \leq 2$, we know $x_0$ is a strictly positive number.
+    A positive number multiplied by $\leq 0$ is still $\leq 0$. This leaves us with:
+    \[
+        v_t(t_0,x_0) \leq -\epsilon
+    \]
+    Since $\epsilon$ is a positive number, $-\epsilon$ is negative, which means $v_t(t_0,x_0)$ must be strictly less than zero.
+    but we already established that $v_t(t_0,x_0) \geq 0$.
+
+    We have $0 \leq v_t \leq -\epsilon < 0$, which is a contradiction.
+
+    Because of this contradiction, our assumption is false.
+    So $v(t,x)$ cannot have its maximum on the interior, and must have it on the boundary.
+    If we let $\epsilon \to 0$, $v(t,x)$ turns back into $u(t,x)$, which means $u(t,x)$ must also have its maximum on the boundary.
+    \closepart
+    \qpart{
+        Establish uniqueness of the solution to this initial-boundary value problem.
+    }
+
+    Let's assume we have two solutions, $u_1(t,x)$ and $u_2(t,x)$, that both solve the PDE and
+    the given initial and boundary conditions.
+
+    We can define a new functions $w(t,x)$ such that:
+    \[
+        w(t,x) = u_1(t,x) - u_2(t,x)
+    \]
+
+    The PDE is linear, so we can subtract the PDE for $u_2$ from the PDE for $u_1$, which
+    shows us that $w(t,x)$ will also solve the PDE:
+    \[
+        w_t = x w_{xx} + w_x
+    \]
+
+    Now we can check the initial and boundary conditions for $w$.
+    Since $u_1$ and $u_2$ share the exact
+    same conditions, they will subtract to zero:
+    \begin{gather*}
+        w(0,x) = u_1(0,x) - u_2(0,x) = f(x) - f(x) = 0 \\
+        w(t,1) = u_1(t,1) - u_2(t,1) = \alpha(t) - \alpha(t) = 0 \\
+        w(t,2) = u_1(t,2) - u_2(t,2) = \beta(t) - \beta(t) = 0
+    \end{gather*}
+    This means that on the entire boundary,
+    the value of $w(t,x)$ is $0$.
+
+    Using the maximum principle, the maximum value of $w(t,x)$ must
+    be on this boundary.
+    So $w(t,x) \leq 0$ everywhere on the interior domain.
+
+    We can also use the maximum principle on $-w(t,x)$
+    to show that the minimum value of $w(t,x)$ must also be on the boundary.
+
+    Since the boundary is 0, this means $w(t,x) \geq 0$ everywhere on the interior.
+
+    Since $0 \leq w(t,x) \leq 0$, $w(t,x) = 0$ everywhere on our domain.
+
+    Therefore, $u_1(t,x) - u_2(t,x) = 0 \implies u_1(t,x) = u_2(t,x)$ which shows that any two
+    solutions to the PDE must be identical, so the solution is unique.
     \closepart
 \end{document}
