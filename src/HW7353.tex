@@ -134,7 +134,27 @@
         x(t) = (1-x_0)t + x_0\\
         x_0 = \frac{x-t}{1-t}\\
         u(x,t) = \frac{1-x}{1-t}\\
-        t_
+        t_s = 1
+    \end{gather*}
+    \begin{gather*}
+        \phi(u) = \frac{u^2}{2}\\
+        u^- = 2, \ u^+ = 0\\
+        \frac{ds}{dt} = \frac{0-2}{0-2} = 1\\
+        x_s(t) = t
+    \end{gather*}
+    Final piece wise solution:
+    \begin{gather*}
+        \text{For $t \leq 1$}\\
+        u(x,t) = \begin{cases}
+                     2,\ x<2t-1\\
+                     \frac{1-x}{1-t},\ 2t-1\leq x \leq 1\\
+                     0,\ x>1
+        \end{cases}\\\\
+        \text{For $t>1$}\\
+        u(x,t) = \begin{cases}
+            2,\ x< t\\
+                     0,\ x>t
+            \end{cases}
     \end{gather*}
     \newpage
     \question{
@@ -157,6 +177,53 @@
 
     }
 
+    For the first region, $x_0 < 0,\ u_0(x_0) = 0$
+    \begin{gather*}
+        x(t) = (0)t + x_0 \\
+        x = x_0 \\
+        u(x,t) = 0
+    \end{gather*}
+    For the second region, $0 \leq x_0 \leq 1,\ u_0(x_0) = x_0$
+    \begin{gather*}
+        x(t) = x_0 t + x_0 = x_0(t + 1) \\
+        x_0 = \frac{x}{t + 1} \\
+        u(x,t) = \frac{x}{t + 1}
+    \end{gather*}
+    For the third region, $x_0 > 1,\ u_0(x_0) = 0$
+    \begin{gather*}
+        x(t) = (0)t + x_0 \\
+        x = x_0 \\
+        u(x,t) = 0
+    \end{gather*}
+    Taking the derivative of the $x_s$ with respect to $t$ to find the shock speed between region 2 and 3:
+    \begin{gather*}
+        t_s = 0,\ x_s(0) = 1 \\
+        \frac{dx_s}{dt} = \frac{u^+ + u^-}{2} = \frac{0 + \frac{x_s}{1+t}}{2} = \frac{x_s}{2+2t}
+    \end{gather*}
+    Solving the separable differential equation:
+    \begin{gather*}
+        \frac{dx_s}{x_s} = \frac{dt}{2(1+t)} \\
+        \int \frac{1}{x_s} \,dx_s = \int \frac{1}{2(1+t)} \,dt \\
+        \ln|x_s| = \frac{1}{2}\ln|1+t| + C
+    \end{gather*}
+    Using the initial condition $x_s(0) = 1$:
+    \begin{gather*}
+        \ln(1) = \frac{1}{2}\ln(1) + C \\
+        0 = 0 + C \\
+        C = 0
+    \end{gather*}
+    \begin{gather*}
+        \ln|x_s| = \ln\left(\sqrt{1+t}\right) \\
+        x_s(t) = \sqrt{t+1}
+    \end{gather*}
+    Final piecewise solution:
+    \begin{gather*}
+        u(x,t) = \begin{cases}
+                     0, & x < 0 \\
+                     \frac{x}{t+1}, & 0 \leq x < \sqrt{t+1} \\
+                     0, & x > \sqrt{t+1}
+        \end{cases}
+    \end{gather*}
     \newpage
     \question{
         \textbf{Three Shocks}\\
@@ -177,6 +244,76 @@
         \]
     }
 
+    Finding the flux function $\phi(u)$ by taking the integral:
+    \begin{gather*}
+        u_t + \phi'(u) u_x = 0 \\
+        \phi'(u) = u^2 \\
+        \phi(u) = \int u^2 \,du = \frac{1}{3}u^3
+    \end{gather*}
+    For the first shock at $x_0 = 0$, taking the derivative of $x_{s1}$:
+    \begin{gather*}
+        u^- = 2,\ u^+ = 1 \\
+        \frac{dx_{s1}}{dt} = \frac{\phi(u^+) - \phi(u^-)}{u^+ - u^-} = \frac{\frac{1}{3}(1)^3 - \frac{1}{3}(2)^3}{1 - 2} = \frac{\frac{1}{3} - \frac{8}{3}}{-1} = \frac{7}{3} \\
+        dx_{s1} = \frac{7}{3} \,dt \\
+        \int \,dx_{s1} = \int \frac{7}{3} \,dt \\
+        x_{s1}(t) = \frac{7}{3}t + C
+    \end{gather*}
+    Using $x_{s1}(0) = 0$:
+    \begin{gather*}
+        0 = \frac{7}{3}(0) + C \implies C = 0 \\
+        x_{s1}(t) = \frac{7}{3}t
+    \end{gather*}
+    For the second shock at $x_0 = 1$, taking the derivative of $x_{s2}$:
+    \begin{gather*}
+        u^- = 1,\ u^+ = 0 \\
+        \frac{dx_{s2}}{dt} = \frac{\frac{1}{3}(0)^3 - \frac{1}{3}(1)^3}{0 - 1} = \frac{-\frac{1}{3}}{-1} = \frac{1}{3} \\
+        dx_{s2} = \frac{1}{3} \,dt \\
+        \int \,dx_{s2} = \int \frac{1}{3} \,dt \\
+        x_{s2}(t) = \frac{1}{3}t + C
+    \end{gather*}
+    Using $x_{s2}(0) = 1$:
+    \begin{gather*}
+        1 = \frac{1}{3}(0) + C \implies C = 1 \\
+        x_{s2}(t) = \frac{1}{3}t + 1
+    \end{gather*}
+    Solving for the collision time $t_c$:
+    \begin{gather*}
+        \frac{7}{3}t = \frac{1}{3}t + 1 \\
+        7t = t + 3 \\
+        6t = 3 \\
+        t_c = \frac{1}{2} \\
+        x_c = x_{s1}\left(\frac{1}{2}\right) = \frac{7}{6}
+    \end{gather*}
+    For the third shock, taking the derivative of $x_{s3}$:
+    \begin{gather*}
+        u^- = 2,\ u^+ = 0 \\
+        \frac{dx_{s3}}{dt} = \frac{\frac{1}{3}(0)^3 - \frac{1}{3}(2)^3}{0 - 2} = \frac{-\frac{8}{3}}{-2} = \frac{4}{3} \\
+        dx_{s3} = \frac{4}{3} \,dt \\
+        \int \,dx_{s3} = \int \frac{4}{3} \,dt \\
+        x_{s3}(t) = \frac{4}{3}t + C
+    \end{gather*}
+    Using the point $(x_c, t_c) = \left(\frac{7}{6}, \frac{1}{2}\right)$:
+    \begin{gather*}
+        \frac{7}{6} = \frac{4}{3}\left(\frac{1}{2}\right) + C \\
+        \frac{7}{6} = \frac{4}{6} + C \implies C = \frac{3}{6} = \frac{1}{2} \\
+        x_{s3}(t) = \frac{4}{3}t + \frac{1}{2}
+    \end{gather*}
+    Final piecewise solution:
+    \begin{gather*}
+        \text{For } t \leq \frac{1}{2} \\
+        u(x,t) = \begin{cases}
+                     2, & x < \frac{7}{3}t \\
+                     1, & \frac{7}{3}t \leq x \leq \frac{1}{3}t + 1 \\
+                     0, & x > \frac{1}{3}t + 1
+        \end{cases} \\\\
+        \text{For } t > \frac{1}{2} \\
+        u(x,t) = \begin{cases}
+                     2, & x < \frac{4}{3}t + \frac{1}{2} \\
+                     0, & x > \frac{4}{3}t + \frac{1}{2}
+        \end{cases}
+    \end{gather*}
+
+
     \newpage
     \question{
         \textbf{Two shocks}
@@ -196,6 +333,73 @@
             \end{cases}
         \]
     }
+
+    \begin{gather*}
+        u_t + u u_x = 0 \\
+        \phi(u) = \frac{1}{2}u^2
+    \end{gather*}
+    For the first shock at $x_0 = -1$, taking the derivative of $x_{s1}$:
+    \begin{gather*}
+        u^- = 1,\ u^+ = 0 \\
+        \frac{dx_{s1}}{dt} = \frac{\frac{1}{2}(0)^2 - \frac{1}{2}(1)^2}{0 - 1} = \frac{-\frac{1}{2}}{-1} = \frac{1}{2} \\
+        dx_{s1} = \frac{1}{2} \,dt \\
+        \int \,dx_{s1} = \int \frac{1}{2} \,dt \\
+        x_{s1}(t) = \frac{1}{2}t + C
+    \end{gather*}
+    Using $x_{s1}(0) = -1$:
+    \begin{gather*}
+        -1 = \frac{1}{2}(0) + C \implies C = -1 \\
+        x_{s1}(t) = \frac{1}{2}t - 1
+    \end{gather*}
+    For the second shock at $x_0 = 1$, taking the derivative of $x_{s2}$:
+    \begin{gather*}
+        u^- = 0,\ u^+ = -1 \\
+        \frac{dx_{s2}}{dt} = \frac{\frac{1}{2}(-1)^2 - \frac{1}{2}(0)^2}{-1 - 0} = \frac{\frac{1}{2}}{-1} = -\frac{1}{2} \\
+        dx_{s2} = -\frac{1}{2} \,dt \\
+        \int \,dx_{s2} = \int -\frac{1}{2} \,dt \\
+        x_{s2}(t) = -\frac{1}{2}t + C
+    \end{gather*}
+    Using $x_{s2}(0) = 1$:
+    \begin{gather*}
+        1 = -\frac{1}{2}(0) + C \implies C = 1 \\
+        x_{s2}(t) = -\frac{1}{2}t + 1
+    \end{gather*}
+    Solving for the collision time $t_c$:
+    \begin{gather*}
+        -\frac{1}{2}t + 1 = \frac{1}{2}t - 1 \\
+        -t + 2 = t - 2 \\
+        2t = 4 \\
+        t_c = 2 \\
+        x_c = x_{s2}(2) = -\frac{1}{2}(2) + 1 = 0
+    \end{gather*}
+    For the third shock, taking the derivative of $x_{s3}$:
+    \begin{gather*}
+        u^- = 1,\ u^+ = -1 \\
+        \frac{dx_{s3}}{dt} = \frac{\frac{1}{2}(-1)^2 - \frac{1}{2}(1)^2}{-1 - 1} = \frac{0}{-2} = 0 \\
+        dx_{s3} = 0 \,dt \\
+        \int \,dx_{s3} = \int 0 \,dt \\
+        x_{s3}(t) = C
+    \end{gather*}
+    Using the point $(x_c, t_c) = (0, 2)$:
+    \begin{gather*}
+        C = x_c = 0 \\
+        x_{s3}(t) = 0
+    \end{gather*}
+    Final piecewise solution:
+    \begin{gather*}
+        \text{For } t \leq 2 \\
+        u(x,t) = \begin{cases}
+                     1, & x < \frac{1}{2}t - 1 \\
+                     0, & \frac{1}{2}t - 1 \leq x \leq -\frac{1}{2}t + 1 \\
+                     -1, & x > -\frac{1}{2}t + 1
+        \end{cases} \\\\
+        \text{For } t > 2 \\
+        u(x,t) = \begin{cases}
+                     1, & x < 0 \\
+                     -1, & x > 0
+        \end{cases}
+    \end{gather*}
+
     \newpage
     \question{
     \textbf{Feedback}\\
