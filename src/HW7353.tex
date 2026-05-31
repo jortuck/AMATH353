@@ -102,7 +102,40 @@
             \end{cases}
         \]
     }
-
+    Find the characteristic curve.
+    \begin{gather*}
+        u_t + uu_x =0\\
+        c(u) = u\\
+        \frac{dx}{dt} = u\\
+        u = u_0(x_0)\\
+        \frac{dx}{dt} = u\\
+        dx = u dt\\
+        \int dx = \int u \,dt\\
+        x(t) = u_0(x_0) t + C\\
+    \end{gather*}
+    Solving for $C$
+    \begin{gather*}
+        x(0) = x_0\\
+        x_0 = u_0(x_0) (0) + C\\
+        x_0 = C\\\\
+        x(t) = u_0(x_0) t + x_0
+    \end{gather*}
+    For the first region, $x_0<-1,\ u_0(x_0)=2$
+    \[
+        x(t) = 2t +x_0
+    \]
+    For the second region $x_0 > 0, \ u_0 =0$
+    \[
+        x(t) = (0) t +x_0 = X_0
+    \]
+    For the third region where the break occurs $-1 \leq x \leq 1,\ u_0(x_0)=1-x_0$
+    \begin{gather*}
+        u = 1-x_0\\
+        x(t) = (1-x_0)t + x_0\\
+        x_0 = \frac{x-t}{1-t}\\
+        u(x,t) = \frac{1-x}{1-t}\\
+        t_
+    \end{gather*}
     \newpage
     \question{
         \textbf{A Harder Shock Solution}\\
